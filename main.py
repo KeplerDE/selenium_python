@@ -1,16 +1,47 @@
-# This is a sample Python script.
+from selenium import webdriver
+import time
+import random
+from fake_useragent import UserAgent
+# url = "https://www.instagram.com/"
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+user_agents_list = [
+    "hello_world",
+    "best_of_the_best",
+    "python_today"
+]
+
+useragent = UserAgent()              # создадим обьект класса
+# чтобы передавать опции в наш браузер, нам нужно создать обьект опций
+options = webdriver.ChromeOptions()
+# options.add_argument("user-agent=HelloWorld)")              # подмена UserAgent
+# options.add_argument("user-agent=Mozilla/5.0 (Linux; Android 7.0; SM-G930V Build/NRD90M) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.125 Mobile Safari/537.36")
+# options.add_argument(f"user-agent={random.choice(user_agents_list)}")
+options.add_argument(f"user-agent={useragent.random}")       # далее мы вызываем и получае рандомный клиентский адрес
+
+# set proxy
+# options.add_argument("--proxy-server=138.128.91.65:8000")
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+driver = webdriver.Chrome(
+    executable_path="chromedriver/chromedriver.exe",
+    options=options
+)
 
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
+try:
+    # driver.get(url="https://www.whatismybrowser.com/detect/what-is-my-user-agent/")                   # перейти по заданной ссылке
+    # time.sleep(5)
+    # driver.get(url="https://vk.com/")
+    # time.sleep(5)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    # driver.refresh()
+    # driver.get_screenshot_as_file("1.png")
+    # driver.save_screenshot("2.png")
+    driver.get("https://2ip.ru")
+    time.sleep(5)
+
+except Exception as ex:
+    print(ex)
+finally:
+    driver.close()
+    driver.quit()
