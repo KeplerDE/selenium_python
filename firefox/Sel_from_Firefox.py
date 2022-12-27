@@ -1,22 +1,24 @@
 from selenium import webdriver
 import time
+from fake_useragent import UserAgent
 
 
-# # options
-# options = webdriver.ChromeOptions()
-#
-# # user-agent
-# options.add_argument("user-agent=Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:84.0) Gecko/20100101 Firefox/84.0")
+# options
+options = webdriver.FirefoxOptions()
+
+# change useragent
+useragent = UserAgent()
+options.set_preference("general.useragent.override", useragent.random)   # метод перезаписи
 
 driver = webdriver.Firefox(
     executable_path="E:\PycharmProjects\selenium_python\firefox\geckodriver.exe",
-    # options=options
+    options=options
 )
 
 
 try:
-    driver.get("https://vk.com/")
-    driver.save_screenshot("vk.png")
+    driver.get("https://www.whatismybrowser.com/detect/what-is-my-user-agent")
+    # driver.save_screenshot("vk.png")
     time.sleep(5)
     # email_input = driver.find_element("id", "index_email")        # передаём параметром значение ай ди шника нашей испытуемыой формы
     # email_input.clear()
